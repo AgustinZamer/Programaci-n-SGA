@@ -37,6 +37,7 @@ Durante el desarrollo del proyecto se incorporarán progresivamente nuevas tecno
 Actualmente:
 
 - HTML5
+- JavaScript
 
 
 Próximamente:
@@ -58,8 +59,8 @@ Próximamente:
 
 ## Estado del proyecto
 
-🚧 En desarrollo.
-
+- Versión: 
+Clase 02
 
 
 ## Autor

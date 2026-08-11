@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script src="JS/alumnos.js"></script>
+    <script src="JS/alumnos.js" defer></script>
     <title>SGA</title>
 </head>
 <body>
     <h1>Sistema de Gestión Académica</h1>
-    <p>Proyecto de Programación IV</p>
+    <h2>Alta de Alumno</h2>
+    <form id="formAlumno">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre"><br><br>
+
+        <label for="carrera">Carrera</label>
+        <input type="text" id="carrera"><br><br>
+
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo"> <br><br>
+
+        <button type="submit">Guardar Alumno</button>
+        <hr>
+        <h2>Alumnos registrados</h2>
+        <ul id="listaAlumnos"></ul>
+    </form>
 </body>
 </html>

@@ -65,3 +65,36 @@ th, td {
 th {
     background-color: #f0f0f0;
 }
+
+.mje-exito {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #d1fae5;
+    color: #166534;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+.mje-error {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #fee2e2;
+    color: #991b1b;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.oculto {
+    display: none;
+}
+
+.mje-exito {
+    color: green;
+}

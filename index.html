@@ -6,46 +6,36 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-        <script src="JS/alumnos.js" defer></script>
         <title>SGA</title>
     </head>
     <body>
-        <header>
-            <h1>Sistema de Gestión Académica</h1>
-        </header>
-        <main>
-            <section class="formulario">
-                <h2>Alta de Alumno</h2>
-                <form id="formAlumno">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre"><br><br>
-
-                    <label for="carrera">Carrera</label>
-                    <input type="text" id="carrera"><br><br>
-
-                    <label for="correo">Correo electrónico</label>
-                    <input type="texto" id="correo"> <br><br>
-
-                    <button type="submit">Guardar Alumno</button>
-                </form>
-                <p id="mensaje" class="oculto"></p>
-            </section>
-            <section class="alumnos">
-                <h2>Alumnos registrados</h2>
-                <p id="cantidadAlumnos"></p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Carrera</th>
-                            <th>Correo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="listaAlumnos"></tbody>
-                </table>
-            </section>
-        </main>
+       <header>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="alumnos.html">Alumnos</a>
+            <a href="docentes.html">Docentes</a>
+        </nav>
+       </header>
+       <main class="inicio">
+        <h1>Sistema de Gestión Académica</h1>
+        <p>Bienvenido al Sistema de Gestión Académica</p>
+        <section class="modulos">
+            <a href="alumnos.html" class="tarjeta">
+                <i class="fa-solid fa-users"></i>
+                <h2>Alumnos</h2>
+                <p>Gestionar alumnos</p>
+            </a>
+            <a href="docentes.html" class="tarjeta">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h2>Docentes</h2>
+                <p>Gestionar docentes</p>
+            </a>
+            <div class="tarjeta tarjeta-deshabilitada">
+                <i class="fa-solid fa-book"></i>
+                <h2>Materias</h2>
+                <p>Próximamente</p>
+            </div>
+        </section>
+       </main>
     </body>
 </html>

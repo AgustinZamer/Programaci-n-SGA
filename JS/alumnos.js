@@ -98,7 +98,7 @@ formulario.addEventListener("submit", function (event) {
 
         mostrarMensaje("Alumno actualizado correctamente", "mje-exito")
     }
-    localStorage.setItem("alumnos", JSON.stringify(alumnos))
+    // localStorage.setItem("alumnos", JSON.stringify(alumnos))
     mostraAlumnos(alumnos)
     formulario.reset()
 });
@@ -112,12 +112,12 @@ function obtenerAlumnos() {
     return []
 }
 
-function mostrarMensaje(texto, tipo) {
+function mostrarMensaje(texto, clase) {
     mensaje.textContent = texto;
-    mensaje.className = tipo
+    mensaje.className = `mensaje ${clase}`
+    mensaje.style.display = "block"
     setTimeout(() => {
-        mensaje.textContent = " ";
-        mensaje.className = "oculto"
+        mensaje.style.display = "none"
     }, 3000);
 }
 

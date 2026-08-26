@@ -38,18 +38,29 @@ Próximamente:
 ## Estado del proyecto
 
 - Versión: 
-Clase 10 - Estructura actual
+Clase 12 - Estructura actual
 SGA/
-├── index.html
-├── alumnos.html
-├── docentes.html
-│
-├── css/
-│   └── estilos.css
-│
-└── js/
-    ├── alumnos.js
-    └── docentes.js
+frontend
+ ├── index.html
+ ├── alumnos.html
+ ├── docentes.html
+ │
+ ├── css/
+ │   └── estilos.css
+ │
+ └── js/
+      ├── alumnos.js
+      └── docentes.js
+backend
+
+## Estado actual
+- Página de inicio y navegación entre módulos
+- Módulo alumnos docentes
+- CRUD alumnos/docentes
+- Validaciones de formularios
+- Persistencia mediante localStorage
+- Organización del código y refactorización
+- Separación inicial entre Frontend y Backend
 
 ## Almacenamiento
 

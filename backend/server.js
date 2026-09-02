@@ -4,18 +4,7 @@ app.use(express.json())
 const alumnosRoutes = require("./routes/alumnos.routes")
 app.use("/alumnos", alumnosRoutes)
 
-let alumnos = [
-    {
-        id: 1,
-        nombre: "Ana",
-        carrera: "Programación"
-    },
-    {
-        id: 2,
-        nombre: "José",
-        carrera: "Sistemas"
-    }
-]
+
 // Creo un middleware
 app.use((req, res, next) => {
     console.log(req.method)

@@ -27,12 +27,12 @@ Actualmente:
 - HTML5
 - JavaScript
 - CSS
+- express
+- Node.js
 
 
 Próximamente:
 - React
-- Node.js
-- Express
 - MongoDB
 
 ## Estado del proyecto
@@ -61,6 +61,11 @@ backend
 - Persistencia mediante localStorage
 - Organización del código y refactorización
 - Separación inicial entre Frontend y Backend
+- Implementación de validaciones para los datos recibidos mediante req.body
+- Uso de status 400 para datos inválidos
+- status 404 para alumno no encontrado
+- status 201 para registrar nuevo alumno
+- Manejo básico de errores en la operaciones del CRUD.
 
 ## Almacenamiento
 

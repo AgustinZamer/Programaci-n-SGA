@@ -123,7 +123,7 @@ formulario.addEventListener("submit", function (event) {
     // localStorage.setItem("alumnos", JSON.stringify(alumnos))
     guardarDatos("alumnos", alumnos)
 
-    mostraAlumnos(alumnos)
+    mostrarAlumnos(alumnos)
     formulario.reset()
 });
 
@@ -132,9 +132,7 @@ function obtenerAlumnos() {
     return obtenerDatos("alumnos")
 }
 
-
-
-function mostraAlumnos(alumnos) {
+function mostrarAlumnos(alumnos) {
     listaAlumnos.innerHTML = ""
     for (const alumno of alumnos) {
         listaAlumnos.innerHTML += `
@@ -161,13 +159,14 @@ function mostraAlumnos(alumnos) {
         `;
     }
 }
+
 function eliminarAlumno(id) {
     const alumnos = obtenerAlumnos()
     const alumnosActualizados = alumnos.filter(
         alumno => alumno.id !== id
     );
     localStorage.setItem("alumnos", JSON.stringify(alumnosActualizados))
-    mostraAlumnos(alumnosActualizados)
+    mostrarAlumnos(alumnosActualizados)
     if (alumnoEditandoId === id){
         formulario.reset()
         alumnoEditandoId = null

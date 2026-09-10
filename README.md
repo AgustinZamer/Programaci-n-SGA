@@ -53,6 +53,16 @@ frontend
       ├── alumnos.js
       └── docentes.js
 backend
+ ├── config/
+ |    └── database.js
+ ├── controllers/
+ |    └── alumnos.controller.js
+ ├── data/
+ |    └── alumnos.js
+ ├── models/
+ |    └── Alumno.js
+ ├── routes/
+      └── alumnos.routes.js
 
 ## Estado actual
 - Página de inicio y navegación entre módulos

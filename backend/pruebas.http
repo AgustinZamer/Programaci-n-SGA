@@ -8,18 +8,17 @@ POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "legajo": 1021,
+    "legajo": 1023,
     "nombre": "Ramón",
     "carrera": "Sistemas",
     "correo": "ramon@mail.com"
 }
 ###
-PUT http://localhost:3000/alumnos/1003
+PUT http://localhost:3000/alumnos/1002
 Content-Type: application/json
 
 {
-    "legajo": 1003,
-    "nombre": "Juan",
+    "nombre": "Juan Carlos",
     "carrera": "Programación",
     "correo": "juan@mail.com"
 }

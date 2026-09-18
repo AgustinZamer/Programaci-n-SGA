@@ -32,7 +32,7 @@ formulario.addEventListener("submit", async function (event) {
         mostrarMensaje("El nombre debe tener al menos 3 caracteres", "mje-error")
         return
     }
-
+try {
     // Si alumnoEditandoLegajo es null, significa que estamos creando un nuevo alumno, por lo que hacemos un POST.
     if (alumnoEditandoLegajo === null) {
         const alumno = { 
@@ -49,8 +49,7 @@ formulario.addEventListener("submit", async function (event) {
             body: JSON.stringify(alumno) 
         })
         if (!respuesta.ok) { 
-            mostrarMensaje("No se pudo guardar el alumno", "mje-error")
-            return
+           throw new Error("La API respondió con un error.")
         }
         mostrarMensaje("Alumno guardado correctamente", "mje-exito")
     } else { 
@@ -75,8 +74,7 @@ formulario.addEventListener("submit", async function (event) {
             })
         })
         if (!respuesta.ok) {
-            mostrarMensaje("No se pudo actualizar el alumno", "mje-error")
-            return
+            throw new Error("La API respondió con un error")
         }
         alumnoEditandoLegajo = null 
         alumnoEditar = null 
@@ -87,17 +85,22 @@ formulario.addEventListener("submit", async function (event) {
     }
     await actualizarListaAlumnos() 
     formulario.reset()
+} catch (error){
+    console.error(error.message)
+    mostrarMensaje("No fue posible realizar la operación", "mje-error")
+}
 });
 
 
 async function obtenerAlumnos() { 
+    try{
     const respuesta = await fetch(API_ALUMNOS)  
-    if (!respuesta.ok) { 
-        mostrarMensaje("No se pudo obtener la lista de alumnos", "mje-error")
-        return []
-    }
     const alumnos = await respuesta.json() 
     return alumnos
+    } catch (error) {
+        console.error(error.message)
+        throw error
+    }
 }
 
 function mostrarAlumnos(alumnos) {
@@ -150,8 +153,12 @@ function mostrarAlumnos(alumnos) {
 }
 
 async function actualizarListaAlumnos() { 
+    try {
     const alumnos = await obtenerAlumnos()
     mostrarAlumnos(alumnos)
+    } catch (error) {
+        mostrarMensaje("No se pudo cargar la lista de alumnos", "mje-error")
+    }
 }
 
 listaAlumnos.addEventListener("click", (e) => { 

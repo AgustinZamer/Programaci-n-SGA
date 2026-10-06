@@ -1,22 +1,10 @@
-import Incrementar from "./components/ejemplos/Incrementar"
-import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
-import { Adivina } from "./components/ejemplos/Adivina"
-import Mensaje from "./components/ejemplos/Mensaje"
-import TamanioTexto from "./components/ejemplos/TamanioTexto"
+import FormularioA from "./components/FormularioA"
 
 function App()
 {
+
   return (
-    <>
-    <TamanioTexto />
-    <br />
-    <Mensaje />
-    <Incrementar />
-    <br />
-    <CambiarTitulo />
-    <br />
-    <Adivina />
-    </>
+    <FormularioA />
   )
 }
 export default App

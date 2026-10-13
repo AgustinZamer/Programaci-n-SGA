@@ -1,25 +1,11 @@
-import { useEffect, useState } from "react"
+import { ListaAlumnos } from "./components/ListaAlumnos"
 
 function App()
 {
-const [nombre, setNombre] = useState("")
-
-useEffect(() => {
-  if (nombre){
-    document.title = `Hola ${nombre}`
-  } else {
-    document.title = `Mi aplicación`
-    }
-}, [nombre])
 
 return (
    <>
-  <input 
-  value = {nombre}
-  onChange={(e) => setNombre(e.target.value)}
-  placeholder="Escribí tu nombre"
-  />
-  <h2>Hola {nombre} </h2>
+ <ListaAlumnos />
    </>
   )
 }

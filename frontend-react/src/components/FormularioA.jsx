@@ -5,7 +5,7 @@ function FormularioA({ onAlumnoCreado }){
     const [formulario, setFormulario] = useState({
         legajo: "",
         nombre: "",
-        carrrera: "",
+        carrera: "",
         correo: ""
     })
     const [error, setError] = useState("")

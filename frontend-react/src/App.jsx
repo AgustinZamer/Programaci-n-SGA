@@ -5,14 +5,27 @@ import FormularioA from "./components/FormularioA"
 function App()
 {
 const [actualizar, setActualizar] = useState(0)
+const [alumnoEditar, setAlumnoEditar] = useState(null)
+
 function alumnoCreado() {
   setActualizar(valor => valor + 1)
+  setAlumnoEditar(null)
+}
+
+function seleccionarAlumno(alumno) {
+  setAlumnoEditar(alumno)
 }
 
 return (
    <main>
-   <FormularioA onAlumnoCreado={alumnoCreado}/>
-   <ListaAlumnos actualizar={actualizar}/>
+   <FormularioA key={alumnoEditar?.legajo ?? "nuevo"}
+   onAlumnoCreado={alumnoCreado}
+   alumnoEditar={alumnoEditar}/>
+   <ListaAlumnos 
+   actualizar={actualizar} 
+   onAlumnoCreado={alumnoCreado}
+   onEditarAlumno={seleccionarAlumno}
+   />
    </main>
   )
 }

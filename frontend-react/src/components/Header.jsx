@@ -1,11 +1,4 @@
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Container from "@mui/material/Container"
-import IconButton from "@mui/material/IconButton"
-import Link from "@mui/material/Link"
-import Stack from "@mui/material/Stack"
-import Toolbar from "@mui/material/Toolbar"
-import Typography from "@mui/material/Typography"
+import { AppBar, Box, Container, IconButton, Link, Stack, Toolbar, Typography } from "@mui/material"
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded"
 import { Link as RouterLink } from "react-router-dom"
 import SelectorTema from "./SelectorTema";

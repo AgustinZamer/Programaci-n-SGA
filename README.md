@@ -94,6 +94,6 @@ backend
 
 ## Autor
 
-Irina Agretti
+Agustín Zamer
 
 Programación IV

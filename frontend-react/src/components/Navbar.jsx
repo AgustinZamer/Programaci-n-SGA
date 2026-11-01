@@ -1,10 +1,10 @@
-export function Navbar(){
+export default function Navbar(){
     return (
-        <nav>
-            <a href="#">Inicio</a> |
-            <a href="#">Alumnos</a>
+        <nav className="mb-4">
+            <a href="/">Inicio</a> |{" "}
+            <a href="/alumnos">Alumnos</a> |{" "}
+            <a href="/docentes">Docentes</a> |{" "}
+            <a href="/materias">Materias</a>
         </nav>
     )
 }
-
-// export default Navbar

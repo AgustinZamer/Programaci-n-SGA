@@ -1,3 +1,4 @@
+import Materias from "./pages/Materias";
 import Alumnos from "./pages/Alumnos"
 import {FAQ} from "./pages/FAQ"
 import {Routes, Route} from "react-router-dom"
@@ -15,6 +16,7 @@ return (
     <Route index element={<Inicio />} />
     <Route path="alumnos" element={<Alumnos />} />
     <Route path="docentes" element={<Docentes /> } />
+    <Route path="materias" element={<Materias />} />
     <Route path="ayuda" element={<FAQ />} />
     </Route>
   </Routes>

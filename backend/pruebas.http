@@ -49,3 +49,164 @@ Content-Type: application/json
     "especialidad": "Programación",
     "correo": "rocio@mail.com"
 }
+
+### 
+GET http://localhost:3000/materias
+
+### 
+POST http://localhost:3000/materias
+Content-Type: application/json
+
+{
+  "codigo": "PRG4",
+  "nombre": "Programación IV",
+  "descripcion": "Desarrollo web full stack",
+  "cargaHoraria": 5,
+  "estado": "activa"
+}
+
+###
+POST http://localhost:3000/materias
+Content-Type: application/json
+
+{
+  "codigo": "BD1",
+  "nombre": "Base de Datos I",
+  "descripcion": "Modelado y SQL",
+  "cargaHoraria": 4,
+  "estado": "activa"
+}
+
+### 
+GET http://localhost:3000/materias
+
+### 
+GET http://localhost:3000/materias/PRG4
+
+### 
+GET http://localhost:3000/materias/MAT999
+
+### 
+POST http://localhost:3000/materias
+Content-Type: application/json
+
+{
+  "codigo": "PRG4",
+  "nombre": "Repetida",
+  "cargaHoraria": 3,
+  "estado": "activa"
+}
+
+### 
+POST http://localhost:3000/materias
+Content-Type: application/json
+
+{
+  "codigo": "MAT1",
+  "nombre": "Matemática",
+  "cargaHoraria": 4,
+  "estado": "activa"
+}
+
+### 
+PUT http://localhost:3000/materias/MAT1
+Content-Type: application/json
+
+{
+  "codigo": "PRG4",
+  "nombre": "Programación IV Avanzada",
+  "descripcion": "React y Node.js",
+  "cargaHoraria": 6,
+  "estado": "activa"
+}
+
+###
+DELETE http://localhost:3000/materias/PRG4
+
+###
+GET http://localhost:3000/materias/PRG4
+
+###
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+  "legajo": 1001,
+  "nombre": "Agustín Zamer",
+  "carrera": "Programación",
+  "correo": "agustinzamer79@gmail.com"
+}
+
+###
+GET http://localhost:3000/alumnos
+
+###
+GET http://localhost:3000/alumnos/1001
+
+###
+PUT http://localhost:3000/alumnos/1001
+Content-Type: application/json
+
+{
+  "legajo": 1001,
+  "nombre": "Agustín Zamer",
+  "carrera": "Técnico en Programación",
+  "correo": "agustinzamer79@gmail.com"
+}
+
+###
+DELETE http://localhost:3000/alumnos/1001
+
+###
+###
+POST http://localhost:3000/docentes
+Content-Type: application/json
+
+{
+  "dni": 2001,
+  "nombre": "Matías Nardelli",
+  "especialidad": "Sistemas Operativos",
+  "correo": "matiasnardelli@gmail.com"
+}
+
+###
+GET http://localhost:3000/docentes
+
+###
+GET http://localhost:3000/docentes/2001
+
+###
+PUT http://localhost:3000/docentes/2001
+Content-Type: application/json
+
+{
+  "dni": 2001,
+  "nombre": "Matías Nardelli",
+  "especialidad": "Arquitectura y Sistemas",
+  "correo": "matiasnardelli@gmail.com"
+}
+
+###
+DELETE http://localhost:3000/docentes/2001
+
+###
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Agustín",
+  "email": "agustinzamer79@gmail.com",
+  "password": "password123"
+}
+
+###
+GET http://localhost:3000/usuarios
+
+###
+POST http://localhost:3000/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "agustinzamer79@gmail.com",
+  "password": "password123"
+}

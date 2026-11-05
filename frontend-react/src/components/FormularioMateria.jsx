@@ -65,100 +65,104 @@ const FormularioMateria = ({ materiaAEditar, onGuardar, onCancelar }) => {
   };
 
   return (
-    <div className="card mb-4 shadow-sm">
-      <div className="card-header bg-primary text-white">
-        <h5 className="mb-0">
-          {materiaAEditar ? "Editar Materia" : "Registrar Nueva Materia"}
-        </h5>
-      </div>
-      <div className="card-body">
-        {error && <div className="alert alert-danger">{error}</div>}
+    <div>
+      <h2 className="text-xl font-semibold text-white mb-4">
+        {materiaAEditar ? "Editar Materia" : "Registrar Nueva Materia"}
+      </h2>
 
-        <form onSubmit={handleSubmit}>
-          <div className="row g-3">
-            <div className="col-md-4">
-              <label className="form-label font-weight-bold">Código:</label>
-              <input
-                type="text"
-                name="codigo"
-                className="form-control"
-                value={formData.codigo}
-                onChange={handleChange}
-                disabled={!!materiaAEditar}
-                placeholder="Ej: PRG4"
-                required
-              />
-            </div>
+      {error && (
+        <div className="p-3 mb-4 rounded-lg bg-red-900/50 border border-red-700 text-red-200 text-sm">
+          {error}
+        </div>
+      )}
 
-            <div className="col-md-8">
-              <label className="form-label font-weight-bold">Nombre:</label>
-              <input
-                type="text"
-                name="nombre"
-                className="form-control"
-                value={formData.nombre}
-                onChange={handleChange}
-                placeholder="Ej: Programación IV"
-                required
-              />
-            </div>
-
-            <div className="col-md-12">
-              <label className="form-label font-weight-bold">Descripción:</label>
-              <input
-                type="text"
-                name="descripcion"
-                className="form-control"
-                value={formData.descripcion}
-                onChange={handleChange}
-                placeholder="Descripción general de la asignatura"
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label font-weight-bold">Carga Horaria (Hs):</label>
-              <input
-                type="number"
-                name="cargaHoraria"
-                className="form-control"
-                value={formData.cargaHoraria}
-                onChange={handleChange}
-                placeholder="Ej: 90"
-                min="1"
-                required
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label font-weight-bold">Estado:</label>
-              <select
-                name="estado"
-                className="form-select"
-                value={formData.estado}
-                onChange={handleChange}
-              >
-                <option value="activa">Activa</option>
-                <option value="inactiva">Inactiva</option>
-              </select>
-            </div>
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="md:col-span-4">
+            <label className="block text-sm font-medium text-gray-300 mb-1">Código *</label>
+            <input
+              type="text"
+              name="codigo"
+              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
+              value={formData.codigo}
+              onChange={handleChange}
+              disabled={!!materiaAEditar}
+              placeholder="Ej: PRG4"
+              required
+            />
           </div>
 
-          <div className="mt-4 d-flex gap-2">
-            <button type="submit" className="btn btn-success">
-              {materiaAEditar ? "Guardar Cambios" : "Agregar Materia"}
+          <div className="md:col-span-8">
+            <label className="block text-sm font-medium text-gray-300 mb-1">Nombre *</label>
+            <input
+              type="text"
+              name="nombre"
+              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={formData.nombre}
+              onChange={handleChange}
+              placeholder="Ej: Programación IV"
+              required
+            />
+          </div>
+
+          <div className="md:col-span-12">
+            <label className="block text-sm font-medium text-gray-300 mb-1">Descripción:</label>
+            <input
+              type="text"
+              name="descripcion"
+              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={formData.descripcion}
+              onChange={handleChange}
+              placeholder="Descripción general de la asignatura"
+            />
+          </div>
+
+          <div className="md:col-span-6">
+            <label className="block text-sm font-medium text-gray-300 mb-1">Carga Horaria (Hs) *</label>
+            <input
+              type="number"
+              name="cargaHoraria"
+              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={formData.cargaHoraria}
+              onChange={handleChange}
+              placeholder="Ej: 90"
+              min="1"
+              required
+            />
+          </div>
+
+          <div className="md:col-span-6">
+            <label className="block text-sm font-medium text-gray-300 mb-1">Estado:</label>
+            <select
+              name="estado"
+              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              value={formData.estado}
+              onChange={handleChange}
+            >
+              <option value="activa">Activa</option>
+              <option value="inactiva">Inactiva</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="mt-6 flex gap-3">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg transition-colors cursor-pointer"
+          >
+            {materiaAEditar ? "Guardar Cambios" : "Agregar Materia"}
+          </button>
+          {materiaAEditar && (
+            <button
+              type="button"
+              className="bg-gray-700 hover:bg-gray-600 text-white font-medium px-6 py-2.5 rounded-lg transition-colors cursor-pointer"
+              onClick={onCancelar}
+            >
+              Cancelar
             </button>
-            {materiaAEditar && (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={onCancelar}
-              >
-                Cancelar
-              </button>
-            )}
-          </div>
-        </form>
-      </div>
+          )}
+        </div>
+      </form>
     </div>
   );
 };

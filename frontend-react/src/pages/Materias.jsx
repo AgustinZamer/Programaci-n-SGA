@@ -96,35 +96,26 @@ const Materias = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
-      <main className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6">Gestión de Materias</h2>
+    <div>
+      <h2>Gestión de Materias</h2>
 
-        {mensaje && (
-          <div className={`p-4 mb-6 rounded-lg text-sm ${mensaje.tipo === "danger" ? "bg-red-900/50 border border-red-700 text-red-200" : "bg-green-900/50 border border-green-700 text-green-200"}`}>
-            {mensaje.texto}
-          </div>
-        )}
-
-        {/* Tarjeta del Formulario */}
-        <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 shadow-lg mb-8">
-          <FormularioMateria
-            materiaAEditar={materiaAEditar}
-            onGuardar={handleGuardar}
-            onCancelar={() => setMateriaAEditar(null)}
-          />
+      {mensaje && (
+        <div className={`alert ${mensaje.tipo === "danger" ? "alert-danger" : "alert-success"}`}>
+          {mensaje.texto}
         </div>
+      )}
 
-        {/* Tarjeta del Listado */}
-        <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 shadow-lg">
-          <h3 className="text-xl font-semibold text-white mb-4">Listado de Materias</h3>
-          <ListaMaterias
-            materias={materias}
-            onEditar={(materia) => setMateriaAEditar(materia)}
-            onEliminar={handleEliminar}
-          />
-        </div>
-      </main>
+      <FormularioMateria
+        materiaAEditar={materiaAEditar}
+        onGuardar={handleGuardar}
+        onCancelar={() => setMateriaAEditar(null)}
+      />
+
+      <ListaMaterias
+        materias={materias}
+        onEditar={(materia) => setMateriaAEditar(materia)}
+        onEliminar={handleEliminar}
+      />
     </div>
   );
 };

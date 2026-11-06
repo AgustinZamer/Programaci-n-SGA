@@ -1,144 +1,207 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
+import { Alert, Box, Button, MenuItem, Paper, TextField, Typography } from "@mui/material"
 
-const FormularioMateria = ({ materiaAEditar, onGuardar, onCancelar }) => {
-  const [formData, setFormData] = useState({
-    codigo: "",
-    nombre: "",
-    descripcion: "",
-    cargaHoraria: "",
-    estado: "activa",
-  });
+const API_MATERIAS = "http://localhost:3000/api/materias"
 
-  const [error, setError] = useState("");
+export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
+    const [formulario, setFormulario] = useState({
+        codigo: String(materiaEditar?.codigo ?? ""),
+        nombre: materiaEditar?.nombre ?? "",
+        descripcion: materiaEditar?.descripcion ?? "",
+        cargaHoraria: String(materiaEditar?.cargaHoraria ?? ""),
+        estado: materiaEditar?.estado ?? "Activa"
+    })
+    const [error, setError] = useState("")
+    const [guardando, setGuardando] = useState(false)
 
-  useEffect(() => {
-    if (materiaAEditar) {
-      setFormData({
-        codigo: materiaAEditar.codigo || "",
-        nombre: materiaAEditar.nombre || "",
-        descripcion: materiaAEditar.descripcion || "",
-        cargaHoraria: materiaAEditar.cargaHoraria || "",
-        estado: materiaAEditar.estado || "activa",
-      });
-    } else {
-      setFormData({
-        codigo: "",
-        nombre: "",
-        descripcion: "",
-        cargaHoraria: "",
-        estado: "activa",
-      });
-    }
-  }, [materiaAEditar]);
+    useEffect(() => {
+        if (materiaEditar) {
+            setFormulario({
+                codigo: String(materiaEditar.codigo ?? ""),
+                nombre: materiaEditar.nombre ?? "",
+                descripcion: materiaEditar.descripcion ?? "",
+                cargaHoraria: String(materiaEditar.cargaHoraria ?? ""),
+                estado: materiaEditar.estado ?? "Activa"
+            })
+        } else {
+            setFormulario({
+                codigo: "",
+                nombre: "",
+                descripcion: "",
+                cargaHoraria: "",
+                estado: "Activa"
+            })
+        }
+    }, [materiaEditar])
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
-
-    if (!formData.codigo.trim() || /\s/.test(formData.codigo.trim())) {
-      setError("El código es obligatorio y no debe contener espacios.");
-      return;
-    }
-    if (!formData.nombre.trim()) {
-      setError("El nombre de la materia es obligatorio.");
-      return;
-    }
-    const horas = parseInt(formData.cargaHoraria, 10);
-    if (isNaN(horas) || horas <= 0) {
-      setError("La carga horaria debe ser un entero mayor a cero.");
-      return;
+    function manejarCambio(e) {
+        const { name, value } = e.target
+        setFormulario({
+            ...formulario,
+            [name]: value
+        })
     }
 
-    onGuardar({
-      ...formData,
-      codigo: formData.codigo.trim().toUpperCase(),
-      cargaHoraria: horas,
-    });
-  };
+    async function guardar(e) {
+        e.preventDefault()
+        setError("")
+        setGuardando(true)
 
-  return (
-    <div className="formulario-materia-container">
-      <h3>{materiaAEditar ? "Editar Materia" : "Registrar Nueva Materia"}</h3>
+        const materia = {
+            ...formulario,
+            cargaHoraria: Number(formulario.cargaHoraria)
+        }
 
-      {error && <div className="error-msg">{error}</div>}
+        const editando = Boolean(materiaEditar)
+        const url = editando 
+            ? `${API_MATERIAS}/${materiaEditar.codigo}` 
+            : API_MATERIAS
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Código:</label>
-          <input
-            type="text"
-            name="codigo"
-            value={formData.codigo}
-            onChange={handleChange}
-            disabled={!!materiaAEditar}
-            required
-          />
-        </div>
+        try {
+            const respuesta = await fetch(url, {
+                method: editando ? "PUT" : "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(materia)
+            })
 
-        <div>
-          <label>Nombre:</label>
-          <input
-            type="text"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            const resultado = await respuesta.json()
 
-        <div>
-          <label>Descripción:</label>
-          <input
-            type="text"
-            name="descripcion"
-            value={formData.descripcion}
-            onChange={handleChange}
-          />
-        </div>
+            if (!respuesta.ok) {
+                throw new Error(resultado.mensaje || `No se pudo guardar la materia. Estado HTTP: ${respuesta.status}`)
+            }
 
-        <div>
-          <label>Carga Horaria:</label>
-          <input
-            type="number"
-            name="cargaHoraria"
-            value={formData.cargaHoraria}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            setFormulario({
+                codigo: "",
+                nombre: "",
+                descripcion: "",
+                cargaHoraria: "",
+                estado: "Activa"
+            })
+            if (onMateriaCreada) onMateriaCreada()
+        } catch (err) {
+            console.error("Error al guardar:", err)
+            setError(err.message || "No se pudo conectar con el servidor")
+        } finally {
+            setGuardando(false)
+        }
+    }
 
-        <div>
-          <label>Estado:</label>
-          <select
-            name="estado"
-            value={formData.estado}
-            onChange={handleChange}
-          >
-            <option value="activa">Activa</option>
-            <option value="inactiva">Inactiva</option>
-          </select>
-        </div>
+    function cancelar() {
+        if (onCancelar) onCancelar()
+    }
 
-        <button type="submit">
-          {materiaAEditar ? "Guardar Cambios" : "Agregar Materia"}
-        </button>
-
-        {materiaAEditar && (
-          <button type="button" onClick={onCancelar}>
-            Cancelar
-          </button>
-        )}
-      </form>
-    </div>
-  );
-};
-
-export default FormularioMateria;
+    return (
+        <Paper
+            component="section"
+            elevation={0}
+            sx={{
+                p: { xs: 2.5, sm: 3.5 },
+                mb: 3,
+                border: 1,
+                borderColor: "divider",
+                borderRadius: 4,
+                bgcolor: "background.paper"
+            }}
+        >
+            <Typography component="h2" variant="h5" sx={{ mb: 2.5, fontWeight: 700 }}>
+                {materiaEditar ? "Editar Materia" : "Nueva Materia"}
+            </Typography>
+            <Box
+                component="form"
+                onSubmit={guardar}
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))" },
+                    gap: 2
+                }}
+            >
+                <TextField
+                    id="codigo"
+                    name="codigo"
+                    label="Código"
+                    value={formulario.codigo}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <TextField
+                    id="nombre"
+                    name="nombre"
+                    label="Nombre"
+                    value={formulario.nombre}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <TextField
+                    id="cargaHoraria"
+                    name="cargaHoraria"
+                    label="Carga Horaria (Hs)"
+                    type="number"
+                    value={formulario.cargaHoraria}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                />
+                <TextField
+                    select
+                    id="estado"
+                    name="estado"
+                    label="Estado"
+                    value={formulario.estado}
+                    onChange={manejarCambio}
+                    required
+                    fullWidth
+                >
+                    <MenuItem value="Activa">Activa</MenuItem>
+                    <MenuItem value="Inactiva">Inactiva</MenuItem>
+                </TextField>
+                <TextField
+                    id="descripcion"
+                    name="descripcion"
+                    label="Descripción"
+                    value={formulario.descripcion}
+                    onChange={manejarCambio}
+                    multiline
+                    rows={2}
+                    required
+                    fullWidth
+                    sx={{ gridColumn: "1 / -1" }}
+                />
+                <Box
+                    sx={{
+                        gridColumn: "1 / -1",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        flexWrap: "wrap",
+                        gap: 1.5,
+                        mt: 1
+                    }}
+                >
+                    <Button type="submit" variant="contained" disabled={guardando}>
+                        {guardando
+                            ? "Guardando..."
+                            : materiaEditar
+                                ? "Guardar cambios"
+                                : "Guardar"}
+                    </Button>
+                    {materiaEditar && (
+                        <Button
+                            type="button"
+                            onClick={cancelar}
+                            disabled={guardando}
+                            variant="outlined"
+                        >
+                            Cancelar
+                        </Button>
+                    )}
+                </Box>
+                {error && (
+                    <Alert severity="error" role="alert" sx={{ gridColumn: "1 / -1" }}>
+                        {error}
+                    </Alert>
+                )}
+            </Box>
+        </Paper>
+    )
+}

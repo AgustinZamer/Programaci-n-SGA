@@ -1,35 +1,32 @@
-require("dotenv").config() 
+require("dotenv").config();
 
-const express = require("express") 
-const cors = require("cors")
+const express = require("express");
+const cors = require("cors");
 
-const conectarDB = require("./config/database")
-const alumnosRoutes = require("./routes/alumnos.routes") 
-const docentesRoutes = require("./routes/docentes.routes")
-const materiaRoutes = require("./routes/materiaRoutes")
-const usuariosRoutes = require("./routes/usuarios.routes")
-const app = express() 
+const conectarDB = require("./config/database");
+const alumnosRoutes = require("./routes/alumnos.routes");
+const docentesRoutes = require("./routes/docentes.routes");
+const materiaRoutes = require("./routes/materiaRoutes");
+const usuariosRoutes = require("./routes/usuarios.routes");
 
-app.use(express.json()) 
-app.use(cors()) 
-app.use("/alumnos", alumnosRoutes) 
-app.use("/docentes", docentesRoutes)
-app.use("/usuarios", usuariosRoutes)
-app.use("/materias", materiaRoutes)
-const PORT = process.env.PORT 
+const app = express(); 
 
-conectarDB() 
+app.use(express.json());
+app.use(cors());
 
-console.log("Ejecutado con nodemon")
+// Rutas de la API (con el prefijo /api para que coincida con el frontend)
+app.use("/api/alumnos", alumnosRoutes);
+app.use("/api/docentes", docentesRoutes);
+app.use("/api/usuarios", usuariosRoutes);
+app.use("/api/materias", materiaRoutes);
+
+const PORT = process.env.PORT || 5000; 
+
+conectarDB(); 
+
+console.log("Ejecutado con nodemon");
 
 app.listen(PORT, () => { 
-    console.log(`Servidor funcionando en http://localhost:${PORT}`)
-})
+    console.log(`Servidor funcionando en http://localhost:${PORT}`);
+});
 
-
-// Creo un middleware
-// app.use((req, res, next) => {
-//     console.log(req.method)
-//     console.log(req.url)
-//     next()
-// })

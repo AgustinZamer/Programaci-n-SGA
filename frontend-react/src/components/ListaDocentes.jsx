@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Alert, Box, Button, Chip, Paper, Stack, Typography } from "@mui/material"
 
-const API_DOCENTES = "http://localhost:3000/docentes"
+const API_DOCENTES = "http://localhost:3000/api/docentes"
 
 export function ListaDocentes({ actualizar, onDocenteCreado, onEditarDocente }) {
     const [docentes, setDocentes] = useState([])

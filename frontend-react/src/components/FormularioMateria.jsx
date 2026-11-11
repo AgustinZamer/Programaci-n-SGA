@@ -121,7 +121,6 @@ export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCa
                     label="Código"
                     value={formulario.codigo}
                     onChange={manejarCambio}
-                    disabled
                     required
                     fullWidth
                 />

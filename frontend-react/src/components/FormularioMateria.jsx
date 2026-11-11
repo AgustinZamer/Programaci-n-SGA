@@ -5,7 +5,7 @@ const API_MATERIAS = "http://localhost:3000/api/materias"
 
 export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
     const [formulario, setFormulario] = useState({
-        codigo: String(materiaEditar?.codigo ?? ""),
+        codigo: String(materiaEditar?.codigo ?? "PRG4"),
         nombre: materiaEditar?.nombre ?? "",
         descripcion: materiaEditar?.descripcion ?? "",
         cargaHoraria: String(materiaEditar?.cargaHoraria ?? ""),
@@ -25,7 +25,7 @@ export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCa
             })
         } else {
             setFormulario({
-                codigo: "",
+                codigo: "PRG4",
                 nombre: "",
                 descripcion: "",
                 cargaHoraria: "",
@@ -121,6 +121,7 @@ export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCa
                     label="Código"
                     value={formulario.codigo}
                     onChange={manejarCambio}
+                    disabled
                     required
                     fullWidth
                 />

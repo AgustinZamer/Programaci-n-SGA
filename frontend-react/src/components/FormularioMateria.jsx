@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import { Alert, Box, Button, MenuItem, Paper, TextField, Typography } from "@mui/material"
+import { useAuth } from "../context/useAuth"
 
 const API_MATERIAS = "http://localhost:3000/api/materias"
 
 export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
+    const { token } = useAuth()
     const [formulario, setFormulario] = useState({
-        codigo: String(materiaEditar?.codigo ?? "PRG4"),
+        codigo: String(materiaEditar?.codigo ?? ""),
         nombre: materiaEditar?.nombre ?? "",
         descripcion: materiaEditar?.descripcion ?? "",
         cargaHoraria: String(materiaEditar?.cargaHoraria ?? ""),
@@ -25,7 +27,7 @@ export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCa
             })
         } else {
             setFormulario({
-                codigo: "PRG4",
+                codigo: "",
                 nombre: "",
                 descripcion: "",
                 cargaHoraria: "",
@@ -47,20 +49,25 @@ export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCa
         setError("")
         setGuardando(true)
 
+        const tokenActual = token || localStorage.getItem("token")
         const materia = {
             ...formulario,
+            codigo: formulario.codigo.trim().toUpperCase(),
             cargaHoraria: Number(formulario.cargaHoraria)
         }
 
         const editando = Boolean(materiaEditar)
-        const url = editando 
-            ? `${API_MATERIAS}/${materiaEditar.codigo}` 
+        const url = editando
+            ? `${API_MATERIAS}/${materiaEditar.codigo}`
             : API_MATERIAS
 
         try {
             const respuesta = await fetch(url, {
                 method: editando ? "PUT" : "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    ...(tokenActual ? { Authorization: `Bearer ${tokenActual}` } : {})
+                },
                 body: JSON.stringify(materia)
             })
 

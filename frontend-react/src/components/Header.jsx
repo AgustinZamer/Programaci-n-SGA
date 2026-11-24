@@ -1,9 +1,18 @@
-import { AppBar, Box, Container, IconButton, Link, Stack, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Button, Container, IconButton, Link, Stack, Toolbar, Typography } from "@mui/material"
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded"
-import { Link as RouterLink } from "react-router-dom"
-import SelectorTema from "./SelectorTema";
+import { Link as RouterLink, useNavigate } from "react-router-dom"
+import SelectorTema from "./SelectorTema"
+import { useAuth } from "../context/useAuth"
 
 export default function Header() {
+    const { cerrarSesion } = useAuth()
+    const navigate = useNavigate()
+
+    const logout = () => {
+        cerrarSesion()
+        navigate("/login")
+    }
+
     return (
         <AppBar
             component="header"
@@ -98,11 +107,11 @@ export default function Header() {
                             Docentes
                         </Link>
                         <Link
-                           component={RouterLink}
-                           to="/materias"
-                           color="text.primary"
-                           underline="none"
-                          sx={{ px: { xs: 1, sm: 1.5 }, py: 1, borderRadius: 2, "&:hover": { bgcolor: "action.hover" } }}
+                            component={RouterLink}
+                            to="/materias"
+                            color="text.primary"
+                            underline="none"
+                            sx={{ px: { xs: 1, sm: 1.5 }, py: 1, borderRadius: 2, "&:hover": { bgcolor: "action.hover" } }}
                         >
                             Materias
                         </Link>
@@ -115,6 +124,15 @@ export default function Header() {
                         >
                             <HelpOutlineRoundedIcon />
                         </IconButton>
+                        <Button
+                            type="button"
+                            color="inherit"
+                            variant="outlined"
+                            onClick={logout}
+                            sx={{ textTransform: "none", fontWeight: 600 }}
+                        >
+                            Cerrar sesión
+                        </Button>
                         <SelectorTema />
                     </Stack>
                 </Toolbar>

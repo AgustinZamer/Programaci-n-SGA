@@ -4,10 +4,12 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
+import { useAuth } from "../context/useAuth"
 
 const API_MATERIAS = "http://localhost:3000/api/materias"
 
 export default function ListaMaterias({ actualizar, onEditarMateria }) {
+    const { token } = useAuth()
     const [materias, setMaterias] = useState([])
     const [error, setError] = useState("")
     const [cargando, setCargando] = useState(true)
@@ -16,8 +18,12 @@ export default function ListaMaterias({ actualizar, onEditarMateria }) {
         async function cargarMaterias() {
             setCargando(true)
             setError("")
+            const tokenActual = token || localStorage.getItem("token")
+
             try {
-                const respuesta = await fetch(API_MATERIAS)
+                const respuesta = await fetch(API_MATERIAS, {
+                    headers: tokenActual ? { Authorization: `Bearer ${tokenActual}` } : {}
+                })
                 if (!respuesta.ok) {
                     throw new Error(`No se pudo cargar la lista de materias. Estado HTTP: ${respuesta.status}`)
                 }
@@ -31,19 +37,22 @@ export default function ListaMaterias({ actualizar, onEditarMateria }) {
             }
         }
         cargarMaterias()
-    }, [actualizar])
+    }, [actualizar, token])
 
     async function eliminarMateria(codigo) {
         if (!window.confirm("¿Estás seguro de que deseas eliminar esta materia?")) return
+        const tokenActual = token || localStorage.getItem("token")
+
         try {
             const respuesta = await fetch(`${API_MATERIAS}/${codigo}`, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: tokenActual ? { Authorization: `Bearer ${tokenActual}` } : {}
             })
             if (!respuesta.ok) {
                 throw new Error("No se pudo eliminar la materia")
             }
-            onEditarMateria(null)
-            window.location.reload()
+            setMaterias((prev) => prev.filter((m) => m.codigo !== codigo))
+            if (onEditarMateria) onEditarMateria(null)
         } catch (err) {
             console.error("Error al eliminar:", err)
             alert(err.message)

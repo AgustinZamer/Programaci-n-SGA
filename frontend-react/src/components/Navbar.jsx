@@ -1,10 +1,12 @@
-export default function Navbar(){
+import { Link } from "react-router-dom"
+
+export default function Navbar() {
     return (
         <nav className="mb-4">
-            <a href="/">Inicio</a> |{" "}
-            <a href="/alumnos">Alumnos</a> |{" "}
-            <a href="/docentes">Docentes</a> |{" "}
-            <a href="/materias">Materias</a>
+            <Link to="/">Inicio</Link> |{" "}
+            <Link to="/alumnos">Alumnos</Link> |{" "}
+            <Link to="/docentes">Docentes</Link> |{" "}
+            <Link to="/materias">Materias</Link>
         </nav>
     )
 }

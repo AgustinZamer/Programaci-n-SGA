@@ -158,7 +158,6 @@ Content-Type: application/json
 DELETE http://localhost:3000/alumnos/1001
 
 ###
-###
 POST http://localhost:3000/docentes
 Content-Type: application/json
 
@@ -210,3 +209,46 @@ Content-Type: application/json
   "email": "admin@sga.com",
   "password": "ClaveDePrueba123!"
 }
+
+@baseUrl = http://localhost:3000/api
+@token = PEGA_AQUI_TU_TOKEN_JWT
+
+### Prueba 1 - Registrar un curso (POST)
+POST {{baseUrl}}/cursos
+Content-Type: application/json
+# Authorization: Bearer {{token}}
+
+{
+  "codigo": "CUR001",
+  "nombre": "Programación Web",
+  "descripcion": "Desarrollo de aplicaciones web",
+  "duracion": 64
+}
+
+### Listar todos los cursos (GET)
+GET {{baseUrl}}/cursos
+# Authorization: Bearer {{token}}
+
+### Prueba 2a - Consultar un curso por código (GET)
+GET {{baseUrl}}/cursos/CUR001
+# Authorization: Bearer {{token}}
+
+### Prueba 2b - Modificar un curso existente (PUT)
+PUT {{baseUrl}}/cursos/CUR001
+Content-Type: application/json
+# Authorization: Bearer {{token}}
+
+{
+  "codigo": "CUR001",
+  "nombre": "Programación Web II",
+  "descripcion": "Desarrollo de aplicaciones web",
+  "duracion": 80
+}
+
+### Prueba 3 - Eliminar un curso (DELETE)
+DELETE {{baseUrl}}/cursos/CUR001
+# Authorization: Bearer {{token}}
+
+### Verificar que ya no aparezca en el listado (GET)
+GET {{baseUrl}}/cursos
+# Authorization: Bearer {{token}}

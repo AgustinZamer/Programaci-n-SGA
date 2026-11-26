@@ -115,6 +115,15 @@ export default function Header() {
                         >
                             Materias
                         </Link>
+                        <Link
+                            component={RouterLink}
+                            to="/cursos"
+                            color="text.primary"
+                            underline="none"
+                            sx={{ px: { xs: 1, sm: 1.5 }, py: 1, borderRadius: 2, "&:hover": { bgcolor: "action.hover" } }}
+                        >
+                            Cursos
+                        </Link>
                         <IconButton
                             component={RouterLink}
                             to="/ayuda"

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button"
 import Paper from "@mui/material/Paper"
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
-const API_ALUMNOS = "http://localhost:3000/api/alumnos"
+const API_ALUMNOS = "https://programaci-n-sga.onrender.com/api/alumnos"
 
 function FormularioA({ onAlumnoCreado, alumnoEditar, onCancelar }){
     const [formulario, setFormulario] = useState({

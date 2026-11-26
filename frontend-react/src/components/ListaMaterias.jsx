@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import { useAuth } from "../context/useAuth"
 
-const API_MATERIAS = "http://localhost:3000/api/materias"
+const API_MATERIAS = "https://programaci-n-sga.onrender.com/api/materias"
 
 export default function ListaMaterias({ actualizar, onEditarMateria }) {
     const { token } = useAuth()

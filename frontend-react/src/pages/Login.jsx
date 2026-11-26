@@ -26,7 +26,7 @@ export default function Login() {
         setMensaje("")
 
         try {
-            const respuesta = await fetch("http://localhost:3000/api/usuarios/login",
+            const respuesta = await fetch("https://programaci-n-sga.onrender.com/api/usuarios/login",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

@@ -7,13 +7,13 @@ const Usuario = require("./models/Usuario")
 async function crearUsuario() {
   try {
     await mongoose.connect(process.env.MONGO_URI)
-    const email = "admin@sga.com"
-    const password = "ClaveDePrueba123!"
+    const email = "agustinzamer79@gmail.com"
+    const password = "agustin"
 
     const hash = await bcrypt.hash(password, 10)
 
     const usuario = new Usuario({
-      nombre: "Administrador de prueba",
+      nombre: "Agustin Zamer",
       email: email,
       password: hash,
       rol: "admin"

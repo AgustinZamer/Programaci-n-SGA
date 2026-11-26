@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
                 return
             }
             try {
-                const respuesta = await fetch("http://localhost:3000/api/alumnos", 
+                const respuesta = await fetch("https://programaci-n-sga.onrender.com/api/alumnos", 
                     {headers: {Authorization: `Bearer ${tokenGuardado}`}}
                 )
             if (!respuesta.ok) {

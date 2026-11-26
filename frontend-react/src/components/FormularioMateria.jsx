@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Alert, Box, Button, MenuItem, Paper, TextField, Typography } from "@mui/material"
 import { useAuth } from "../context/useAuth"
 
-const API_MATERIAS = "http://localhost:3000/api/materias"
+const API_MATERIAS = "https://programaci-n-sga.onrender.com/api/materias"
 
 export default function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
     const { token } = useAuth()
